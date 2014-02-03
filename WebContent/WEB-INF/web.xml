@@ -1,36 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-<welcome-file-list>
-    <welcome-file>pages/default.jsf</welcome-file>
-</welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xmlns="http://java.sun.com/xml/ns/javaee" 
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+		 					 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
 
-<context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>
-        /WEB-INF/spring-application.xml
-    </param-value>
-</context-param>
-<servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-</servlet>
-<servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
-</servlet-mapping>
-<listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-<listener>
-    <listener-class>
-        org.springframework.web.context.request.RequestContextListener
-    </listener-class>
-</listener>
+	<display-name>Aplicación web JSF 2.2 con Spring 4, Hibernate 4, Primefaces 4, iReport 5.5 </display-name>
+	
+	<welcome-file-list>
+	    <welcome-file>pages/default.jsf</welcome-file>
+	</welcome-file-list> 
+	
+	<context-param>	
+		<param-name>primefaces.THEME</param-name>	
+		<param-value>bluesky</param-value> 
+	</context-param>
+	
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring-application.xml</param-value>
+    </context-param>
+    
+    <context-param> 
+      <param-name> javax.faces.CONFIG_FILES </param-name> 
+      <param-value> /WEB-INF/faces-config.xml </param-value> 
+   </context-param>
+   
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Desarrollo</param-value>
+    </context-param>
+    
+    <servlet-mapping>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+    
+    <!-- Add support for spring -->
+    <listener>
+            <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>   
+
+    <servlet>
+            <servlet-name>Resources Servlet</servlet-name>
+            <servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>
+            <load-on-startup>0</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+            <servlet-name>Resources Servlet</servlet-name>
+            <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+            <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <init-param>
+                    <param-name>contextConfigLocation</param-name>
+                    <param-value></param-value>
+            </init-param>
+            <load-on-startup>1</load-on-startup>
+    </servlet>
+	
+    <servlet-mapping>
+            <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+            <url-pattern>/app/*</url-pattern>
+    </servlet-mapping>
+    
+     <!-- JSF Mapping -->
+    <servlet>
+            <servlet-name>Faces Servlet</servlet-name>
+            <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+            <load-on-startup>1</load-on-startup>
+	</servlet>  
+	
+	<filter>
+         <filter-name>charEncodingFilter</filter-name>
+         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+         <init-param>
+		     <param-name>encoding</param-name>
+		     <param-value>UTF-8</param-value>
+		 </init-param>
+		 <init-param>
+		     <param-name>forceEncoding</param-name>
+		     <param-value>true</param-value>
+		 </init-param>
+	 </filter>
+	 
 </web-app>
