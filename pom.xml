@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ec.com</groupId>
-  <artifactId>WebApplication</artifactId>
+  <groupId>ec.com.webapplication</groupId> 
+  <artifactId>ec.com.webapplication</artifactId> 
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>war</packaging> 
   <build>
-    <testSourceDirectory>src/main/test</testSourceDirectory>
-    <resources>
+    <testSourceDirectory>src/main/test</testSourceDirectory> 
+    <resources> 
+      <resource> 
+        <directory>src/main/resources</directory>  
+        <excludes>
+          <exclude>**/*.java</exclude> 
+        </excludes>
+      </resource>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>src/main/webapp</directory>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
@@ -21,8 +28,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
       <plugin>
@@ -35,16 +42,14 @@
     </plugins>
   </build>
   
-  
-	<properties>
-		<spring.framework.version>3.2.0.RELEASE</spring.framework.version>	
+  <properties>
+		<spring.framework.version>4.0.1.RELEASE</spring.framework.version>
 		<hibernate.core.version>4.3.1.Final</hibernate.core.version>
 		<hibernate.search.version>4.5.0.Final</hibernate.search.version>
 		<hibernate.valitator.version>5.0.3.Final</hibernate.valitator.version>
-		<jsf.version>2.2.4</jsf.version>
 	</properties>
-	
-	<!-- Spring -->
+
+	<!-- Spring --> 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -82,9 +87,9 @@
 			<version>${spring.framework.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-tx</artifactId>
-		    <version>${spring.framework.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.framework.version}</version>
 		</dependency>
 
 		<!-- Hibernate resources 1 -->
@@ -175,7 +180,7 @@
 			<artifactId>hibernate-search-testing</artifactId>
 			<version>${hibernate.search.version}</version>
 		</dependency>
-		
+
 		<!-- Hibernate resources 3 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -197,31 +202,63 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		
+		<dependency>
+		   <groupId>org.javassist</groupId>
+		   <artifactId>javassist</artifactId>
+		   <version>3.18.0-GA</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-dbcp</artifactId>
+		    <version>7.0.41</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
 		<!-- JSF -->
-	    <dependency>
-	        <groupId>com.sun.faces</groupId>
-	        <artifactId>jsf-api</artifactId>
-	        <version>${jsf.version}</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>com.sun.faces</groupId>
-	        <artifactId>jsf-impl</artifactId>
-	        <version>${jsf.version}</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>javax.servlet</groupId>
-	        <artifactId>javax.servlet-api</artifactId>
-	        <version>3.0.1</version>
-	    </dependency>
-		
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+
 		<!-- MySQL Java Connector dependency -->
 		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.17</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.25</version> 
 		</dependency>
-		
+
 		<!-- Log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -230,32 +267,36 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- PrimeFaces -->
 		<dependency>
-	        <groupId>org.primefaces</groupId>
-	        <artifactId>primefaces</artifactId>
-	        <version>4.0</version>
-	    </dependency>
-	    <dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
 			<artifactId>primefaces-extensions</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-		<dependency>  
-		    <groupId>org.primefaces.themes</groupId>  
-		    <artifactId>all-themes</artifactId>  
-		    <version>1.0.10</version>  
-		</dependency> 
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>cupertino</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 	</dependencies>
-		
+
 	<repositories>
 		<repository>
-		    <id>prime-repo</id>
-		    <name>PrimeFaces Maven Repository</name>
-		    <url>http://repository.primefaces.org</url>
-		    <layout>default</layout>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
 		</repository>
 	</repositories>
- 
 </project>
