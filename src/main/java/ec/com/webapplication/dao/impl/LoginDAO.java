@@ -1,11 +1,12 @@
-package ec.com.webapplication.dao;
+package ec.com.webapplication.dao.impl;
 
 import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-import ec.com.webapplication.dao.impl.ILoginDAO;
+import ec.com.webapplication.dao.ILoginDAO;
 import ec.com.webapplication.model.Login;
+
 
 public class LoginDAO implements ILoginDAO{
 	private SessionFactory sessionFactory;
@@ -35,11 +36,13 @@ public class LoginDAO implements ILoginDAO{
      * @return Usuario
      */
     @Override
-    public Login getUserByUser(String user) {
+    public Login getUserByUser(String user, String password) {
         @SuppressWarnings("rawtypes")
 		List list = getSessionFactory().getCurrentSession()
-                                            .createQuery("from Login where Usuario=? and Password =?")
-                                            .setParameter(0, user).list();
+                                       .createQuery("from Login where Usuario=? and Password =?")
+                                       .setParameter(0, user)
+                                       .setParameter(1, password)
+                                       .list();
         return (Login)list.get(0);
     }
  

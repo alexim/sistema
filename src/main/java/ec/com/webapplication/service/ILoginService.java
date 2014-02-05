@@ -1,4 +1,4 @@
-package ec.com.webapplication.service.impl;
+package ec.com.webapplication.service;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface ILoginService {
      *
      * @param  int Usuario Id
      */
-    public Login getByUser(String user);
+    public Login getByUser(String user, String password);
  
     /**
      * Get Usuario List

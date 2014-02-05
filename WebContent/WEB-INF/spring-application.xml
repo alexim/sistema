@@ -42,11 +42,9 @@
     <bean id="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="DataSource" />
         <property name="annotatedClasses">
-            <list>
-            <!--<value>com.ardia.Adherent</value>
-                <value>com.ardia.Emprunt</value>
-                <value>com.ardia.Fournisseur</value>
-                <value>com.ardia.Livre</value>  -->    
+			<list>
+                <value>ec.com.webapplication.model.Login</value>
+                <!-- <value>com.ardia.Livre</value> -->    
             </list>
         </property>
         <property name="hibernateProperties">
@@ -54,7 +52,7 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-            </props>
+            </props> 
         </property>
     </bean>
     

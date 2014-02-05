@@ -1,12 +1,12 @@
-package ec.com.webapplication.service;
+package ec.com.webapplication.service.impl;
 
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import ec.com.webapplication.dao.impl.ILoginDAO;
+import ec.com.webapplication.dao.ILoginDAO;
 import ec.com.webapplication.model.Login;
-import ec.com.webapplication.service.impl.ILoginService;
+import ec.com.webapplication.service.ILoginService;
 
 @Transactional(readOnly = true)
 public class LoginService implements ILoginService {
@@ -20,8 +20,8 @@ public class LoginService implements ILoginService {
      * @param  int Usuario Id
      */
     @Override
-    public Login getByUser(String user) {
-        return getLoginDAO().getUserByUser(user);
+    public Login getByUser(String user, String password) {
+        return getLoginDAO().getUserByUser(user, password);
     }
  
     /**

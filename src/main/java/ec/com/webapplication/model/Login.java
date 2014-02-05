@@ -14,7 +14,7 @@ import ec.com.webapplication.enums.VariablesGlobales.Estado;
 * Login Entity
 *
 * @author Alexi Mendoza
-* @since 28 Dic 2013
+* @since 31/01/2014
 * @version 1.0.0
 *
 */
@@ -26,14 +26,14 @@ public class Login {
 	private Date ingreso;
 	private Estado estado = Estado.ACTIVO;
 	
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	/**
 	 *  @ManyToOne
 		@JoinColumn(name = "idTutor")
 		@NotNull
 		private Profesor tutor;
 	 */
-	@Id
+	
+	@Id 
     @Column(name="Usuario", unique = true, nullable = false)
 	public String getUsuario() {
 		return usuario;

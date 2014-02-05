@@ -267,7 +267,38 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
+		
+		<!-- JasperReport -->
+		<dependency>
+            <groupId>jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+        
+        <!-- AS400 -->
+		<dependency>
+			<groupId>net.sf.jt400</groupId>
+			<artifactId>jt400-full</artifactId>
+			<version>6.0</version>
+		</dependency>
+		
+		<!-- SQL SERVER -->
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+        
+		<!-- ORACLE --> 
+		
+		
+		<!-- SOAP -->
+		<dependency> 
+			<groupId>soap</groupId> 
+			<artifactId>soap</artifactId> 
+			<version>2.3.1</version> 
+	    </dependency>
+		
 		<!-- PrimeFaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -281,16 +312,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>cupertino</artifactId>
-			<version>1.0.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency>
 	</dependencies>
-
+	
 	<repositories>
 		<repository>
 			<id>prime-repo</id>

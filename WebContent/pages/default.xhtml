@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:pe="http://primefaces.org/ui/extensions">
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <!-- xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" -->
 <h:head>
 	<title> Inicio de sesión</title>
@@ -39,12 +40,12 @@
 </h:head>
 
 <h:body>
-	<p:panel style="height: 760px; background-image: url('webapp/pages/login-fondo.jpg');">
+	<p:panel style="height: 760px; background-image: url('pages/login-fondo.jpg');">
 			<f:facet name="header">
 				<p:row>
 					<p:column style="width: 100%;">
 						<span class="right">
-							<p:outputLabel value="Sistema Administrativo de Distribución Masiva (ADM)"/>
+							<p:outputLabel value="Web Application"/>
 							<h:commandButton id="topBtn" onclick="requestFullScreen(document.body); return false;"
 							 image="/images/login-fullscreen.png" style="height: 15px; float:right;" />
 						</span>
@@ -61,14 +62,18 @@
 		    <p:growl id="growl" showDetail="false" life="10000" />  
 		
 		    <p:dialog id="dialog" header="Inicio de sesión" widgetVar="dlg" resizable="false">  
-				<h:panelGrid columns="2" cellpadding="5"> 
+				<h:panelGrid columns="4" cellpadding="3"> 
+					<p:graphicImage value="/images/usuario.ico" alt="Usuario" /> 
 					<h:outputLabel for="usuario" value="Usuario: " />  
 					<p:inputText value="#{loginBean.user}"   
-					        	 id="usuario" required="true" label="usuario" />  
+					        	 id="usuario" required="true" label="usuario" /> 
+					<p:watermark for="usuario" value="Usuario" /> 
 					
+					<p:graphicImage value="/images/clave.ico" alt="Clave" />
 					<h:outputLabel for="clave" value="Clave: " />  
 					<h:inputSecret value="#{loginBean.password}"   
 					        	   id="clave" required="true" label="clave" />  
+					<p:watermark for="clave" value="Clave" />
 					
 					<f:facet name="footer">  
 						<p:commandButton id="loginButton" value="Ingresar" update="growl" actionListener="#{loginBean.login()}" 
@@ -77,22 +82,7 @@
 				</h:panelGrid>  
 		    </p:dialog>  
 		    
-		    <br />
-		    <h:outputLabel style="color:white;"> <br /> <br />
-		   		Acerca del Sistema... <br /> <br />
-		    	JSF 2.2.4 Mojarra  <br />
-				Spring Framework 4.0.1  <br />
-				Hibernate 4  <br /> 
-				Apache Maven 3.1  <br />
-				PrimeFaces 4.0  <br /> 
-				Git  <br />
-				Java JDK 7 update 45  <br />
-				Apache Tomcat 7.0.41  <br />
-				MySQL 5.6  <br />
-				Workbench 6.0 CE  <br />
-				iReport 5.5 (JasperSoft) <br />
-				SpringToolsSuite (STS) 3.4.0 Release
-			</h:outputLabel>
+		    <ui:include src="templates/acerca.xhtml" />
 		</h:form>  
 		
 		<script type="text/javascript">  
