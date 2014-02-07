@@ -31,7 +31,7 @@
    
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Desarrollo</param-value>
+        <param-value>Development</param-value>
     </context-param>
     
     <servlet-mapping>
@@ -90,4 +90,7 @@
 		 </init-param>
 	 </filter>
 	 
+	 <listener>  
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>  
+    </listener>  
 </web-app>

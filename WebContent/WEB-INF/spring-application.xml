@@ -31,12 +31,40 @@
 	</bean>
 		
 	<!-- Data Source Declaration -->
-    <bean id="DataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" 
+	<!-- Class Spring: org.springframework.jdbc.datasource.DriverManagerDataSource -->
+	<!-- <bean id="DataSource" 
+		    class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" 
+		    p:driverClass="net.sourceforge.jtds.jdbc.Driver"
+		    p:jdbcUrl="jdbc:jtds:sybase://url.net:port;DatabaseName=db_1"
+		    p:user="user" 
+		    p:password="password"
+    		/> -->
+	<!-- Class jtds: net.sourceforge.jtds.jdbcx.JtdsDataSource (for SQL Server)-->
+	<!-- <bean id="DataSource" class="net.sourceforge.jtds.jdbcx.JtdsDataSource"
+		  p:databaseName="JBG"
+		  p:serverName="."
+		  p:instance="SQLSERVER2008" 		  
+		  p:user="sa" 
+		  p:password="password">
+    </bean> -->
+    
+	<!-- Class : com.mchange.v2.c3p0.ComboPooledDataSource (for SQL Server) -->
+	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+		  p:driverClass="net.sourceforge.jtds.jdbc.Driver"
+		  p:jdbcUrl="jdbc:jtds:sqlserver://localhost:1433;DatabaseName=JBG"
+		  p:user="sa"
+		  p:password="password"
+		  p:maxConnectionAge="60"
+		  >
+    </bean>
+    
+	<!-- Class Apache: org.apache.commons.dbcp.BasicDataSource (for MySQL) -->
+    <!-- <bean id="DataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" 
 		  p:driverClassName="${jdbc.driverClassName}"
 		  p:url="${jdbc.databaseurl}" 
 		  p:username="${jdbc.username}" 
 		  p:password="${jdbc.password}">
-    </bean>
+    </bean> -->
 
     <!-- Session Factory Declaration -->
     <bean id="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
