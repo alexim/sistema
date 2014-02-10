@@ -1,4 +1,4 @@
-package ec.com.webapplication.enums;
+package ec.com.webapplication.globals;
 
 public class VariablesGlobales {
 	public enum Estado {

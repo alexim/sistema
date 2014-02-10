@@ -2,6 +2,7 @@ package ec.com.webapplication.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import ec.com.webapplication.dao.ILoginDAO;
@@ -38,6 +39,7 @@ public class LoginService implements ILoginService {
      *
      * @return IUserDAO - Usuario DAO
      */
+    @Autowired
     public ILoginDAO getLoginDAO() {
         return loginDAO;
     }
@@ -47,6 +49,7 @@ public class LoginService implements ILoginService {
      *
      * @param IUserDAO - Usuario DAO
      */
+    @Autowired
     public void setLoginDAO(ILoginDAO loginDAO) {
         this.loginDAO = loginDAO;
     }

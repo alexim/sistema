@@ -5,12 +5,13 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
-import ec.com.webapplication.enums.VariablesGlobales.Estado;
+import ec.com.webapplication.globals.VariablesGlobales.Estado;
 import ec.com.webapplication.model.Login;
 import ec.com.webapplication.service.ILoginService;
 
@@ -28,8 +29,8 @@ public class LoginBean implements Serializable{
 	private static final long serialVersionUID = -7883301876834795924L;
 	
  	//Spring Login Service is injected...
-	//@ManagedProperty(value="#{LoginService}")
-    ILoginService loginService;
+	/*@ManagedProperty(value="#{LoginService}")
+    ILoginService loginService;*/
 	
     List<Login> loginList;
     
@@ -60,13 +61,16 @@ public class LoginBean implements Serializable{
     public void setPassword(String password) {  
         this.password = password;  
     }  
-
+    
     public void login() {  
         RequestContext context = RequestContext.getCurrentInstance();  
         FacesMessage msg = null;  
         boolean loggedIn = false;  
-
-        if((user != null ||  user != "") && (password != null || password !="")) {  
+        
+ //       loginList.add(loginService.getByUser(getUser(), getPassword()));
+        //loginList.get(0).equals(getUser())///
+        
+        if (getUser().equals("ADMIN")) {  
             loggedIn = true;  
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Inciando sesión", user);  
         } else {  

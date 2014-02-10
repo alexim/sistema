@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import ec.com.webapplication.enums.VariablesGlobales.Estado;
+import ec.com.webapplication.globals.VariablesGlobales.Estado;
 
 /**
 *

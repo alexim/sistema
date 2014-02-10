@@ -3,11 +3,12 @@ package ec.com.webapplication.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
 
 import ec.com.webapplication.dao.ILoginDAO;
 import ec.com.webapplication.model.Login;
 
-
+@Service
 public class LoginDAO implements ILoginDAO{
 	private SessionFactory sessionFactory;
 	 
