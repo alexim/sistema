@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ec.com.webapplication</groupId> 
   <artifactId>ec.com.webapplication</artifactId> 
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version> 
   <packaging>war</packaging> 
   <build>
     <testSourceDirectory>src/main/test</testSourceDirectory> 
@@ -38,18 +38,18 @@
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
-      </plugin>
+      </plugin> 
     </plugins>
   </build>
   
-  <properties>
+  <properties> 
 		<spring.framework.version>4.0.1.RELEASE</spring.framework.version>
 		<hibernate.core.version>4.3.1.Final</hibernate.core.version>
 		<hibernate.search.version>4.5.0.Final</hibernate.search.version>
 		<hibernate.valitator.version>5.0.3.Final</hibernate.valitator.version>
 	</properties>
 
-	<!-- Spring --> 
+	<!-- Spring -->  
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -276,13 +276,20 @@
         </dependency>
         
         <!-- AS400 -->
+        <!-- Versiones: 6.0 , 5.4 , 5.3 , 5.2 , 5.1.1 , 5.0 , 4.9.0 , 4.8.0 , 4.7.0 -->
 		<dependency>
 			<groupId>net.sf.jt400</groupId>
 			<artifactId>jt400-full</artifactId>
-			<version>6.0</version>
+			<version>4.7.0</version>
+		</dependency>
+		<!-- Versiones: 6.7 , 6.6 , 6.5.1 , 6.4 , 6.3 , 6.2 , 6.1 -->
+		<dependency>
+		<groupId>net.sf.jt400</groupId>
+			<artifactId>jt400</artifactId>
+			<version>6.1</version>
 		</dependency>
 		
-		<!-- SQL SERVER / SYBASE -->
+		<!-- SQL SERVER (2000, 2005, 2008, 2008 R2, 2012) / SYBASE -->
         <dependency>
 			<groupId>net.sourceforge.jtds</groupId>
 			<artifactId>jtds</artifactId>
@@ -290,6 +297,7 @@
 		</dependency>
 
 		<!-- ORACLE --> 
+		
 		
 		<!-- c3p0 -->
 		<dependency>
@@ -318,7 +326,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>all-themes</artifactId>
+			<artifactId>all-themes</artifactId> 
 			<version>1.0.10</version>
 		</dependency>
 	</dependencies>
@@ -331,4 +339,4 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-</project>
+</project> 

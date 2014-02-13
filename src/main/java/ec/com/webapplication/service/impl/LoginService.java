@@ -1,18 +1,21 @@
 package ec.com.webapplication.service.impl;
 
 import java.util.List;
+ 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ec.com.webapplication.dao.ILoginDAO;
 import ec.com.webapplication.model.Login;
 import ec.com.webapplication.service.ILoginService;
 
+@Service
 @Transactional(readOnly = true)
 public class LoginService implements ILoginService {
 	
-	// LoginDAO is injected...
+	// LoginDAO es inyectado...
 	ILoginDAO loginDAO;
 
 	 /**

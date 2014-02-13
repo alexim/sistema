@@ -78,27 +78,13 @@
 					<p:watermark for="clave" value="Clave" />
 					
 					<f:facet name="footer">  
-						<p:commandButton id="loginButton" value="Ingresar" update="growl" actionListener="#{loginBean.login()}" 
-										 oncomplete="handleLoginRequest(xhr, status, args)"/>  
+						<p:commandButton id="loginButton" value="Ingresar" update="growl" actionListener="#{loginBean.login()}"/>  
 					</f:facet>  
 				</h:panelGrid>  
 		    </p:dialog>  
 		    
 		    <ui:include src="templates/acerca.xhtml" /> 
-		
 		</h:form>  
-		<script type="text/javascript">  
-			function handleLoginRequest(xhr, status, args) {  
-			    if(args.validationFailed || !args.loggedIn) {  
-			        dlg.jq.effect("shake", { times:5 }, 100);  
-			    }   
-			    else {  
-			        dlg.hide();  
-			        $('#loginLink').fadeOut();  
-			        setTimeout(function(){location.href="pages/principal.jsf", 1000} ); 
-			    }  
-			}  
-		</script> 
 	</p:panel>
 </h:body>
 </html>

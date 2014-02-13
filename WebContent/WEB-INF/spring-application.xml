@@ -15,8 +15,9 @@
 						   http://www.springframework.org/schema/security
 						   http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 	
-	<context:annotation-config />
 	<context:component-scan base-package="ec.com.webapplication" />
+	<context:annotation-config/>
+    <!-- <context:spring-configured/> -->
 	<!--  <context:property-placeholder location="classpath:persistence-mysql.properties" />  -->
 	
 	<bean id="messageSource"
@@ -30,29 +31,22 @@
 		  p:location="/WEB-INF/jdbc.properties">
 	</bean>
     
-	<!-- Data Source Declaration. Soporta SQL Server -->
+    <!-- Declaración de orígenes de datos. Soporta SQL Server, MySQL, AS400-->
 	<bean id="DataSource" class="${jdbc.classDataSource}" destroy-method="close"
 		  p:driverClass="${jdbc.driverClassName}"
 		  p:jdbcUrl="${jdbc.databaseurl}"
 		  p:user="${jdbc.username}"
 		  p:password="${jdbc.password}">
     </bean>
-    
-	<!-- Data Source Declaration. Soporta MySQL-->
-	<!--  <bean id="DataSource" class="${jdbc.classDataSource}" destroy-method="close"
-		  p:driverClassName="${jdbc.driverClassName}"
-		  p:url="${jdbc.databaseurl}"
-		  p:username="${jdbc.username}"
-		  p:password="${jdbc.password}">
-    </bean> -->
 	
-    <!-- Session Factory Declaration -->
+    <!-- Declaración de Session Factory -->
     <bean id="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="DataSource" />
         <property name="annotatedClasses">
 			<list>
+				<value>org.hibernate.cfg.AnnotationConfiguration</value>
                 <value>ec.com.webapplication.model.Login</value>
-                <!-- <value>com.ardia.Livre</value> -->    
+                <value>ec.com.webapplication.model.Clientes</value>  
             </list>
         </property>
         <property name="hibernateProperties">
@@ -64,24 +58,36 @@
         </property>
     </bean>
     
-    <!-- Beans Declaration 
-	<bean id="User" class="ec.com.birobid.model.Usuario" />
-
-	 User Service Declaration 
-	<bean id="UserService" class="ec.com.biroid.service.UserService">
-		<property name="userDAO" ref="UserDAO" />
-	</bean>
-
-	 User DAO Declaration 
-	<bean id="UserDAO" class="ec.com.birobid.dao.UserDAO">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean> -->
+    
+    <!-- Declaración de los Beans -->
+	<bean id="Login" class="ec.com.webapplication.model.Login" />
+	<bean id="Cliente" class="ec.com.webapplication.model.Clientes" />
 	
-<!-- Transaction Manager is defined -->
+	<!-- ********************************* LOGIN *********************************** -->
+	<!-- User Service Declaration -->
+	<bean id="LoginService" class="ec.com.webapplication.service.impl.LoginService">
+		<property name="loginDAO" ref="LoginDAO" />
+	</bean>
+	 <!-- User DAO Declaration -->
+	<bean id="LoginDAO" class="ec.com.webapplication.dao.impl.LoginDAO">
+		<property name="sessionFactory" ref="SessionFactory" />
+	</bean>
+	<!-- ******************************** CLIENTE ********************************** -->
+	 <!-- Cliente Service Declaration -->
+<!-- 	<bean id="ClienteService" class="ec.com.webapplication.service.impl.ClienteService">
+		<property name="clienteDAO" ref="ClienteDAO" />
+	</bean>  -->
+	 <!-- Cliente DAO Declaration -->
+<!--	<bean id="ClienteDAO" class="ec.com.webapplication.dao.impl.ClienteDAO">
+		<property name="sessionFactory" ref="SessionFactory" />
+	</bean>  -->
+	
+	
+	<!-- Se define Transaction Manager -->
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
        <property name="sessionFactory" ref="SessionFactory"/>
     </bean>
-
-<!-- Enable the configuration of transactional behavior based on annotations -->
- <tx:annotation-driven transaction-manager="txManager"/>
+    
+	<!-- Habilita la configuración del comportamiento transaccional basado en anotaciones -->
+	<tx:annotation-driven transaction-manager="txManager"/>
 </beans>

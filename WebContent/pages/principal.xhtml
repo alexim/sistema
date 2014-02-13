@@ -10,9 +10,36 @@
      
 <h:head>
 	<title>Bienvenido al Sistema</title>
+	<script type="text/javascript">
+	    function cancelFullScreen(el) {
+	        var requestMethod = el.cancelFullScreen||el.webkitCancelFullScreen||el.mozCancelFullScreen||el.exitFullscreen;
+	        if (requestMethod) { // cancel full screen.
+	            requestMethod.call(el);
+	        } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+	            var wscript = new ActiveXObject("WScript.Shell");
+	            if (wscript !== null) {
+	                wscript.SendKeys("{F11}");
+	            }
+	        }
+	    }
+	    function requestFullScreen(el) {
+	        // Supports most browsers and their versions.
+	        var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+	
+	        if (requestMethod) { // Native full screen.
+	            requestMethod.call(el);
+	        } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+	            var wscript = new ActiveXObject("WScript.Shell");
+	            if (wscript !== null) {
+	                wscript.SendKeys("{F11}");
+	            }
+	        }
+	        return false;
+	    }
+	</script>
 </h:head>
 
-<h:body>
+<h:body style="background-color:white;">
 <h:form>  
     <p:growl id="messages"/>  
     <p:menubar id="menubar">  
@@ -40,12 +67,12 @@
         </p:submenu>
         <p:submenu label="SubMenu4" icon="ui-icon-gear">  
             <p:submenu label="Procesos" icon="ui-icon-refresh">  
-                <p:menuitem value="Opción 1" actionListener="#{menuPrincipal.save}" icon="ui-icon-disk" update="messages" ajax="true" />  
-                <p:menuitem value="Opción 2" actionListener="#{menuPrincipal.update}" icon="ui-icon-arrowrefresh-1-w" update="messages" ajax="true" />  
+                <p:menuitem value="Opción 1"  icon="ui-icon-disk" update="messages" ajax="true" />  
+                <p:menuitem value="Opción 2"  icon="ui-icon-arrowrefresh-1-w" update="messages" ajax="true" />  
             </p:submenu>  
-            <p:submenu label="Mantenimientos" icon="ui-icon-newwin">  
-            	<p:menuitem value="Opción 1" actionListener="#{menuPrincipal.delete}" icon="ui-icon-close" update="messages" ajax="true" onclick="dialog1.show()"/>
-                <p:menuitem value="Opción 2" actionListener="#{menuPrincipal.delete}" icon="ui-icon-close" update="messages" ajax="true" onclick="dialog2.show()"/>  
+            <p:submenu label="Mantenimientos" icon="ui-icon-close">  
+            	<p:menuitem value="Opción 1"  icon="ui-icon-newwin" update="messages" ajax="true" onclick="dialog1.show()" />
+                <p:menuitem value="Opción 2"  icon="ui-icon-newwin" update="messages" ajax="true" onclick="dialog2.show()"/>  
             </p:submenu>  
         </p:submenu>  
         
@@ -53,17 +80,16 @@
             <p:inputText id="keyword" style="margin-right:10px"/>  
             <p:watermark for="keyword" value="Buscar aplicación" /> 
 		    <p:splitButton value="Alexi Mendoza" actionListener="#{buttonBean.save}" update="messages" icon="ui-icon-disk">  
-		        <p:menuitem value="Ayuda" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>    
-		        <p:menuitem value="Acerca del Sistema" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>    
-		        <p:menuitem value="Cambiar contraseña" actionListener="#{buttonBean.delete}" ajax="false" icon="ui-icon-close"/>  
-		        <p:menuitem value="Iniciar chat" actionListener="#{buttonBean.delete}" ajax="false" icon="ui-icon-close"/>  
+		        <p:menuitem value="Ayuda" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+		        <p:menuitem value="Pantalla completa" onclick="requestFullScreen(document.body); return true;" icon="ui-icon-newwin"/>    
+		        <p:menuitem value="Cambiar clave" actionListener="#{buttonBean.delete}" ajax="false" icon="ui-icon-close"/>  
 		        <p:separator />  
-		        <p:menuitem value="Cerrar sesión" url="/pages/default.jsf" icon="ui-icon-extlink"/>  
+		        <p:menuitem value="Cerrar sesión" url="/" icon="ui-icon-extlink"/>  
 		    </p:splitButton>   
         </f:facet>  
     </p:menubar>
-    
-    <!-- Diálogo 1 -->
+	
+	<!-- Diálogo 1 -->
 	<ui:include src="templates/dialog1.xhtml" />
 	
 	<!-- Diálogo 2 -->

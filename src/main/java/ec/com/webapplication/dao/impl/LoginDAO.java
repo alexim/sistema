@@ -3,12 +3,13 @@ package ec.com.webapplication.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Service;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import ec.com.webapplication.dao.ILoginDAO;
 import ec.com.webapplication.model.Login;
 
-@Service
+@Repository
 public class LoginDAO implements ILoginDAO{
 	private SessionFactory sessionFactory;
 	 
@@ -38,12 +39,17 @@ public class LoginDAO implements ILoginDAO{
      */
     @Override
     public Login getUserByUser(String user, String password) {
-        @SuppressWarnings("rawtypes")
-		List list = getSessionFactory().getCurrentSession()
-                                       .createQuery("from Login where Usuario=? and Password =?")
-                                       .setParameter(0, user)
-                                       .setParameter(1, password)
-                                       .list();
+    	List list = (List) getSessionFactory().getCurrentSession().createCriteria(Login.class)
+    													   .add(Restrictions.naturalId()
+    															.set("Usuario", "user")
+    															.set("Clave", "password"))
+														   .setCacheable(true)
+														   .uniqueResult();
+		/*List list = getSessionFactory().getCurrentSession()
+									   .createQuery("from Login where Usuario=:user and Clave=:password")
+					                   .setString("user", user)
+					                   .setString("password", password)
+					                   .list();*/
         return (Login)list.get(0);
     }
  

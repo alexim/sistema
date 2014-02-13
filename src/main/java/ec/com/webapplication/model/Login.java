@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -34,7 +36,7 @@ public class Login {
 	 */
 	
 	@Id 
-    @Column(name="Usuario", unique = true, nullable = false)
+    @Column(name="Usuario", unique = true, nullable = false, length = 15)
 	public String getUsuario() {
 		return usuario;
 	}
@@ -42,7 +44,7 @@ public class Login {
 		this.usuario = usuario;
 	}
 
-	@Column(name="Clave", nullable = false)
+	@Column(name="Clave", nullable = false, length = 20)
 	public String getClave() {
 		return clave;
 	}
@@ -58,6 +60,7 @@ public class Login {
 		this.ingreso = ingreso;
 	}
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name="Estado", nullable = false)
 	public Estado getEstado() {
 		return estado;

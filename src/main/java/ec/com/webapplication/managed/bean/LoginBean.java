@@ -1,15 +1,12 @@
 package ec.com.webapplication.managed.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.context.RequestContext;
 
 import ec.com.webapplication.globals.VariablesGlobales.Estado;
 import ec.com.webapplication.model.Login;
@@ -20,7 +17,7 @@ import ec.com.webapplication.service.ILoginService;
  * @author Alexi
  */
 @ManagedBean(name="loginBean")
-@SessionScoped
+@ RequestScoped
 public class LoginBean implements Serializable{  
 
     /**
@@ -28,11 +25,10 @@ public class LoginBean implements Serializable{
 	 */
 	private static final long serialVersionUID = -7883301876834795924L;
 	
- 	//Spring Login Service is injected...
-	/*@ManagedProperty(value="#{LoginService}")
-    ILoginService loginService;*/
-	
-    List<Login> loginList;
+ 	//Spring Login Service es inyectado...
+	@ManagedProperty(value="#{LoginService}")
+    ILoginService loginService;
+	Login login;
     
     private String user;
 	private String password;
@@ -62,23 +58,50 @@ public class LoginBean implements Serializable{
         this.password = password;  
     }  
     
-    public void login() {  
-        RequestContext context = RequestContext.getCurrentInstance();  
-        FacesMessage msg = null;  
-        boolean loggedIn = false;  
-        
- //       loginList.add(loginService.getByUser(getUser(), getPassword()));
-        //loginList.get(0).equals(getUser())///
-        
-        if (getUser().equals("ADMIN")) {  
-            loggedIn = true;  
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Inciando sesión", user);  
-        } else {  
-            loggedIn = false;  
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Credenciales Incorrectas");  
-        }  
+    public ILoginService getLoginService() {
+		return loginService;
+	}
 
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        context.addCallbackParam("loggedIn", loggedIn);  
-    }  
+	public void setLoginService(ILoginService loginService) {
+		this.loginService = loginService;
+	}
+
+	public Login getLogin() {
+		login = new Login();
+		login = getLoginService().getByUser(user, password);
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}  
+	
+	public void login() {  
+        //RequestContext context = RequestContext.getCurrentInstance();  
+        FacesMessage msg = null;  
+        //boolean loggedIn = false;  
+
+        try{
+        	this.getLogin();
+	      //  if (this.getUser().equals("ADMIN") && (this.getPassword() != null || !this.getPassword().equals(""))) {
+        	if (login != null) {
+	        	FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("USUARIO", user);
+	            //loggedIn = true;  
+	            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Inciando sesión", user);
+	            FacesContext.getCurrentInstance().addMessage(null, msg);
+	            FacesContext.getCurrentInstance().getExternalContext().redirect("pages/principal.jsf");
+	        } else {  
+	            //loggedIn = false;  
+	            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al iniciar sesión", "Credenciales Incorrectas");
+	            FacesContext.getCurrentInstance().addMessage(null, msg);
+	        }  
+	 
+	        /*FacesContext.getCurrentInstance().addMessage(null, msg);
+	        context.addCallbackParam("loggedIn", loggedIn);  */
+        }catch(Exception e){
+        	
+        }
+        
+       
+    }
 }
