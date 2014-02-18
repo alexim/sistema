@@ -14,9 +14,12 @@
 
 <h:body>
 <h:form id="form">  
-<p:dialog id="dialog1" widgetVar="dialog1" showEffect="fade" modal="false" header="Mantenimiento - Opcion 1">
+	<p:dialog id="dialog1" widgetVar="dialog1" showEffect="fade" modal="false" hideEffect="fade" 
+			  header="Mantenimiento - Opcion 1" width="700" height="500" minimizable="true">
 	
-       </p:dialog>
+	</p:dialog>
+	<p:resizable for="dialog1" minWidth="350" maxWidth="1200" minHeight="350" maxHeight="1200" ghost="true"/>
+	<p:draggable for="dialog1" opacity="0.5" /> 
 </h:form>
 </h:body>
 </html>

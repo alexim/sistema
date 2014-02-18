@@ -13,9 +13,9 @@
 
 <h:body>
 <h:form> 
-	<p:dialog id="dialog2" widgetVar="dialog2" showEffect="fade" modal="false" header="Informe - Clientes" 
-			  width="600" height="500" minimizable="true"> 
-	    <p:toolbar>  
+	<p:dialog id="dialog2" widgetVar="dialog2" showEffect="fade" hideEffect="fade" modal="false" 
+			  header="Informe - Clientes" width="700" height="500" minimizable="true"> 
+		<p:toolbar>  
 			<p:toolbarGroup align="left">  
 			    <p:commandButton type="button" value="New" icon="ui-icon-document" />  
 			    <p:commandButton type="button" value="Open" icon="ui-icon-folder-open"/>  
@@ -45,38 +45,27 @@
 			</p:toolbarGroup>  
 		</p:toolbar>   
 		
-		<p:dataTable var="car" value="#{tableBean.cars}" rowKey="#{car.model}" paginator="true" rows="15"  
-                 selection="#{tableBean.selectedCar}" selectionMode="single" filteredValue="#{tableBean.filteredCars}" 
+		<p:dataTable var="row" value="#{clienteBean.clientesList}"  paginator="true" rows="15"
                  id="carsTable" rowsPerPageTemplate="15, 30, 45" 
-                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">  
-  		<f:facet name="header">  
-          <h:outputText value="Basic Message Table"/>  
-          <h:outputText value="-As At Date-"/>  
-          <h:outputText value="#{messageTableController.currentDate}">  
-             <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>  
-          </h:outputText>  
-     </f:facet>  
-        <f:facet name="header">  
-            List of Cars  
-        </f:facet>  
-  
-        <p:column headerText="Model" sortBy="model" filterBy="model" id="model">  
-            #{car.model}  
-        </p:column>  
-  
-        <p:column headerText="Year" sortBy="year" filterBy="year" id="year">  
-            #{car.year}  
-        </p:column>  
-  
-        <p:column headerText="Manufacturer" sortBy="manufacturer" filterBy="manufacturer" id="manufacturer">  
-            #{car.manufacturer}  
-        </p:column>  
-  
-        <p:column headerText="Color" sortBy="color" filterBy="color" id="color">  
-            #{car.color}"  
-        </p:column>  
-  
-    </p:dataTable>  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 emptyMessage="No se encontraron datos.">  
+			
+			<p:column filterBy="#{row.idCliente}" filterMatchMode="contains" headerText="idCliente">
+				<h:outputText value="#{row.idCliente}" />
+			</p:column>
+			<p:column filterBy="#{row.nombre}" filterMatchMode="contains" headerText="Nombre">
+				<h:outputText value="#{row.nombre}" />
+			</p:column>
+			<p:column filterBy="#{row.direccion}" filterMatchMode="contains" headerText="Dirección">
+				<h:outputText value="#{row.direccion}" />
+			</p:column> 
+			<p:column filterBy="#{row.identificacion}" filterMatchMode="contains" headerText="Identificación">  
+            	<h:outputText value="#{row.identificacion}" />
+        	</p:column> 
+        	<p:column filterBy="#{row.ingreso}" filterMatchMode="contains" headerText="Ingreso">  
+            	<h:outputText value="#{row.ingreso}" />
+        	</p:column> 
+    	</p:dataTable>  
 	</p:dialog> 
 	<p:resizable for="dialog2" minWidth="350" maxWidth="1200" minHeight="350" maxHeight="1200" ghost="true"/>
 	<p:draggable for="dialog2" opacity="0.5" /> 

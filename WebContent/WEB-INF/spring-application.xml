@@ -42,6 +42,11 @@
     <!-- Declaración de Session Factory -->
     <bean id="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="DataSource" />
+        <property name="mappingResources">
+        <list>
+            <value>hibernate.cfg.xml</value>
+        </list>
+        </property>
         <property name="annotatedClasses">
 			<list>
 				<value>org.hibernate.cfg.AnnotationConfiguration</value>
@@ -72,15 +77,16 @@
 	<bean id="LoginDAO" class="ec.com.webapplication.dao.impl.LoginDAO">
 		<property name="sessionFactory" ref="SessionFactory" />
 	</bean>
+	
 	<!-- ******************************** CLIENTE ********************************** -->
-	 <!-- Cliente Service Declaration -->
-<!-- 	<bean id="ClienteService" class="ec.com.webapplication.service.impl.ClienteService">
+	<!-- Cliente Service Declaration -->
+	<bean id="ClienteService" class="ec.com.webapplication.service.impl.ClienteService" >
 		<property name="clienteDAO" ref="ClienteDAO" />
-	</bean>  -->
-	 <!-- Cliente DAO Declaration -->
-<!--	<bean id="ClienteDAO" class="ec.com.webapplication.dao.impl.ClienteDAO">
+	</bean>  
+	<!-- Cliente DAO Declaration -->
+	<bean id="ClienteDAO" class="ec.com.webapplication.dao.impl.ClienteDAO" >
 		<property name="sessionFactory" ref="SessionFactory" />
-	</bean>  -->
+	</bean>  
 	
 	
 	<!-- Se define Transaction Manager -->
